@@ -1,31 +1,28 @@
-import React from "react";
+import React,{useRef} from "react";
 import { Play, Plus, Calendar} from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 // import { Button } from "../../Components/ui/Button";
 import { Button } from "@radix-ui/themes";
 
 
+
 const Hero= () => {
+    const ref=useRef(null);
   return (
     <section className="flex flex-col items-center justify-center w-full max-w-5xl px-5 py-20 mx-auto md:px-0 md:py-32 lg:py-40">
       <div className="w-full mx-auto space-y-5">
         <div className="flex items-center justify-center w-full">
-          {/* <div className="flex items-center justify-center w-full mx-auto">
-                        <div className="flex items-center gap-2 px-5 py-1.5 space-x-2 text-sm text-center rounded-full bg-white text-primary w-fit cursor-pointer select-none relative button-wrapper">
-                            <Shield className='inline-block w-4 h-4 text-primary' />
-                            Exam Shield
-                            <div className="button-bg"></div>
-                        </div>
-                    </div> */}
-          <div className="flex items-center justify-center w-full">
-            <div className="mx-auto w-fit button-wrapper">
+        
+          <div ref={ref} className="flex items-center justify-center w-full">
+            <motion.div  drag dragConstraints={ref} whileDrag={{scale:1.3}} className="mx-auto w-fit button-wrapper">
               <button className="flex items-center px-5 py-1.5 text-sm text-center rounded-full bg-white text-primary w-fit cursor-pointer select-none gap-2 font-medium">
               <Calendar  className="inline-flex w-4 h-4 text-primary" />
                  Get Started
               </button>
               <div className="button-bg"></div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <h1 className="text-3xl font-Google1 font-extralight text-center md:text-6xl md:font-light drop-shadow- toslte6 shadow-custom text-slate-900">

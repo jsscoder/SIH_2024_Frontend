@@ -5,6 +5,7 @@
 import Hero from "./Hero";
 import Bubbles from "./Bubbles";
 import LandingNavbar from "./LandingNavbar";
+import Overlayer from "../Overlay/Overlayer";
 
 
 export const LandingPage = () => {
@@ -13,7 +14,7 @@ export const LandingPage = () => {
     
     
     <main className="relative w-full h-full mx-auto max-w-7xl">
-      <LandingNavbar />
+       <LandingNavbar />
       <div className="w-full pt-16 mx-auto">
         <Hero />
         {/* <Features /> */}
