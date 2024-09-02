@@ -1,13 +1,14 @@
 import { useState } from 'react'
 
-import HeroHome from './Components/HeroHome'
+import { LandingPage } from './pages/LandingPage/Landing'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <HeroHome/>
+      
+      <LandingPage/>
       
     </>
   )

@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Google1: ['Lilita One', 'sans-serif']
+      },
+       
+    },
   },
   plugins: [],
 }
