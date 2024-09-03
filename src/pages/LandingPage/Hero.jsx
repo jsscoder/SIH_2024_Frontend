@@ -2,6 +2,7 @@ import React,{useRef} from "react";
 import { Play, Plus, Calendar} from "lucide-react";
 import { motion } from "framer-motion";
 // import { Link } from "react-router-dom";
+import Images from "../../assets/Exports/Index"
 
 // import { Button } from "../../Components/ui/Button";
 
@@ -43,11 +44,11 @@ const Hero= () => {
           <div className="mt-16 flow-root sm:mt-24">
             <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
               <img
-                src="/images/hero.png"
+                src={Images.Background}
                 alt="product preview"
-                width={1440}
-                height={1024}
-                className="rounded-md bg-white p-2 sm:p-8 md:-20 shadow-2xl ring-1 ring-gray-900/10"
+                // width={1440}
+                // height={1024}
+                className="rounded-md w-full h-[37rem] bg-white p-2 sm:p-8 md:-20 shadow-2xl ring-1 ring-gray-900/10"
               />
             </div>
           </div>

@@ -3,9 +3,9 @@ import { twMerge } from "tailwind-merge";
 
 const Bubbles= ({ yStart,yEnd }) => {
   return (
-    <div className="relative h-1">
+    <div className="relative h-1 hidden md:block">
       <div className="absolute flex justify-between w-full ">
-        {[...Array(80)].map((_, indx) => {
+        {[...Array(20)].map((_, indx) => {
           return (
             <div
               key={indx}
@@ -17,6 +17,27 @@ const Bubbles= ({ yStart,yEnd }) => {
               <motion.span
                 key={indx}
                 className="shadow-bubble-blue bg-sky-500 h-2 aspect-square rounded-full -z-30 "
+                initial={{
+                  scale: 0.4,
+                  translateY: yStart,
+                }}
+                animate={{
+                  translateY: yEnd,
+                  scale: 1,
+                  transition: {
+                    repeat: Infinity,
+                    ease:"linear",
+                    repeatType: "loop",
+                    duration:
+                      indx & 1
+                        ? Math.random() * 10 + 100
+                        : Math.random() * 10 + 200,
+                  },
+                }}
+              ></motion.span>
+              <motion.span
+                key={indx+3}
+                className="shadow-bubble-blue bg-rose-700 h-2 aspect-square rounded-full -z-30 "
                 initial={{
                   scale: 0.4,
                   translateY: yStart,
@@ -73,8 +94,8 @@ const Bubbles= ({ yStart,yEnd }) => {
                     ease:"linear",
                     duration:
                       indx & 1
-                        ? Math.random() * 10 + 20
-                        : Math.random() * 10 + 10,
+                        ? Math.random() * 10 + 200
+                        : Math.random() * 10 + 100,
                   },
                 }}
               ></motion.span>

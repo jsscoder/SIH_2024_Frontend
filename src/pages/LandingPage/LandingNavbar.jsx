@@ -18,7 +18,7 @@ const LandingNavbar = () => {
        
      
         <Link to="/">
-          <img src={ICONS.Logo} alt="logo" className="h-10 p-1 " />
+          <img src={ICONS.Logo} alt="logo" className="h-10 p-1 hidden md:block" />
        </Link>
 
         
