@@ -5,7 +5,7 @@ const Overlayer = () => {
   return (
     <>
 
-        <div className="flex h-screen bg-gray-500 justify-center items-center">
+        <div className="flex h-screen justify-center items-center bg-">
           <Login />
 
         </div>

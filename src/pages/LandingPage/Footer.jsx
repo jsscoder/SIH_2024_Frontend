@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="max-w-screen-xl px-4 py-10 pt-20 mx-auto text-gray-500 bg-white border-t md:px-8 border-slate-200 md:py-16">
+    <footer className="max-w-screen-xl px-4 py-10 pt-20 mx-auto text-mytext bg-background border-t md:px-8 border-border md:py-16">
       <div className="max-w-lg sm:mx-auto sm:text-center">
-        <h2 className="text-lg font-semibold text-center text-slate-900">
+        <h2 className="text-lg font-semibold text-center text-mytext">
           Medusa ai
         </h2>
         <p className="mt-2 leading-relaxed text-center">
@@ -15,16 +15,16 @@ const Footer = () => {
         </p>
       </div>
       <ul className="items-center justify-center my-8 space-y-5 sm:flex sm:space-x-4 sm:space-y-0">
-        <li className="text-sm font-medium hover:text-slate-900 text-slate-500">
+        <li className="text-sm font-medium hover:text-mytext text-slate-500">
           <Link to="/about">About</Link>
         </li>
-        <li className="text-sm font-medium hover:text-slate-900 text-slate-500">
+        <li className="text-sm font-medium hover:text-mytext text-slate-500">
           <Link to="/">Help</Link>
         </li>
-        <li className="text-sm font-medium hover:text-slate-900 text-slate-500">
+        <li className="text-sm font-medium hover:text-mytext text-slate-500">
           <Link to="/">Privacy Policy</Link>
         </li>
-        <li className="text-sm font-medium hover:text-slate-900 text-slate-500">
+        <li className="text-sm font-medium hover:text-mytext text-slate-500">
           <Link to="/">Terms of Service</Link>
         </li>
       </ul>
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         <div className="mt-6 sm:mt-0">
           <ul className="flex items-center justify-center space-x-4">
-            <li className="flex items-center justify-center w-10 h-10 border rounded-full hover:bg-slate-100">
+            <li className="flex items-center justify-center w-10 h-10 border rounded-full hover:bg-background" >
               <Link to="/">
                 <img
                   src="/icons/facebook.svg"

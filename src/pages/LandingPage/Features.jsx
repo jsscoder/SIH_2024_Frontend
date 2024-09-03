@@ -1,6 +1,6 @@
 
 import { ArrowRight, ArrowUpRight, Zap } from "lucide-react";
-
+import { Button } from "flowbite-react";
 
 
 const Features = () => {
@@ -33,52 +33,34 @@ const Features = () => {
 
   return (
     <section className="flex flex-col items-center justify-center w-full py-16 space-y-8">
-      {/* <div className="grid w-full grid-cols-1 md:grid-cols-2">
-                <div className="flex items-center justify-center w-full">
-                    <Image
-                        src=""
-                        alt="Features"
-                        width={500}
-                        height={500}
-                        className="object-cover w-full h-full"
-                    />
-                </div>
-                <div className="flex flex-col items-start space-y-4">
-                    <h2 className="!font-heading text-2xl font-semibold text-slate-800">
-                        System check
-                    </h2>
-                    <p className="text-slate-600 text-start">
-
-                    </p>
-                </div>
-            </div> */}
+     
       <div className="flex flex-col items-center justify-center w-full py-8">
-        <h2 className="!font-heading font-bold text-slate-900 text-center text-2xl md:text-3xl">
+        <h2 className="!font-heading font-bold text-mytext text-center text-2xl md:text-3xl">
           Powerful features
         </h2>
-        <p className="max-w-xl text-center text-slate-600">
+        <p className="max-w-xl text-center text-mytext">
           Discover the capabilites that set our platform apart from the rest.
         </p>
       </div>
       <div className="relative w-full mt-12 lg:mt-20">
         <div
           className={
-            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-fuchsia-500 to-white w-96 h-96 top-1/4 blur-3xl -z-10"
+            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-fuchsia-500 to-background w-96 h-96 top-1/4 blur-3xl -z-10"
           }
         />
         <div
           className={
-            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-blue-500 to-white w-96 h-96 top-1/3 blur-3xl -z-10 right-0"
+            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-blue-500 to-background w-96 h-96 top-1/3 blur-3xl -z-10 right-0"
           }
         />
         <div
           className={
-            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-violet-500 to-white w-96 h-96 top-3/4 blur-3xl -z-10 left-0"
+            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-violet-500 to-background w-96 h-96 top-3/4 blur-3xl -z-10 left-0"
           }
         />
         <div
           className={
-            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-cyan-500 to-white w-96 h-96 top-[85%] blur-3xl -z-10 right-0"
+            "absolute hidden rounded-full opacity-25 md:block bg-gradient-to-br from-cyan-500 to-background w-96 h-96 top-[85%] blur-3xl -z-10 right-0"
           }
         />
         {features?.map((feature, index) => (
@@ -107,11 +89,11 @@ const Features = () => {
               </div>
             </div>
             <div className="flex-col items-center self-stretch hidden xl:flex gap-y-6">
-              <div className="w-px h-full bg-slate-200"></div>
-              <div className="flex items-center justify-center flex-none w-12 h-12 tracking-tighter text-white rounded-full lette bg-slate-800">
+              <div className="w-px h-full bg-border"></div>
+              <div className="flex items-center justify-center flex-none w-12 h-12 tracking-tighter text-mytext rounded-full letter bg-border">
                 <span className="text-xl font-bold">{index + 1}</span>
               </div>
-              <div className="w-px h-full bg-slate-200"></div>
+              <div className="w-px h-full bg-border"></div>
             </div>
             <div
               className={`
@@ -121,17 +103,17 @@ const Features = () => {
             >
               <div className="w-full max-w-sm">
                 <div className="mb-2 lg:mb-4">
-                  <h3 className="text-xl font-semibold text-gray-900 capitalize md:text-3xl">
+                  <h3 className="text-xl font-semibold text-mytext capitalize md:text-3xl">
                     {feature.title}
                   </h3>
                 </div>
-                <p className="mb-4 font-normal lg:mb-6 text-slate-600">
+                <p className="mb-4 font-normal lg:mb-6 text-mytext/80">
                   {feature.description}
                 </p>
-                <button variant="outline" size="lg">
+                <Button outline gradientDuoTone="purpleToBlue">
                   Read More{" "}
                   <ArrowUpRight className="w-4 h-4 ml-2 text-current" />
-                </button>
+                </Button>
               </div>
             </div>
           </div>

@@ -7,24 +7,28 @@
     color:rgb(60, 178, 224);
 }
 
-.light{
-    --bg : 215 215 215; 
-    --border : 212 212 212;
-    --card : 255 255 255;
-    --bgcard: 240 240 240;
-    --bg2card : 225 225 225;
-    --mytext : 0, 0, 0;
-    --btntext : 250,250,250;
-    --bgbtn : 50,150,30;
-  }
-.dark{
-    --bg : 0 0 0; 
-    --border : 0 0 0;
-    --card : 0 0 0;
-    --bgcard: 0 0 0;
-    --bg2card : 0 0 0;
-    --mytext : 255, 255, 255;
-    --btntext : 0,0,0;
-    --bgbtn : 255,255,255;
   
+  /* Apply based on a class, for example: */
+  .light {
+    --bg: 250, 250, 250;
+    --border: 216, 226, 227;
+    --card: 255, 255, 255;
+    --bgcard: 240, 240, 240;
+    --bg2card: 224, 224, 224;
+    --mytext: 0, 0, 0;
+    --btntext: 255, 255, 255;
+    --bgbtn: 27,169, 161;
+    --primary:204,229,255;
+}
+
+.dark {
+    --bg: 15,15,15; 
+    --border: 0, 0, 0;
+    --card: 25, 25, 25;
+    --bgcard: 0, 0, 0;
+    --bg2card: 0, 0, 0;
+    --mytext: 255, 255, 255;
+    --btntext: 255, 255, 255;
+    --bgbtn: 27,169, 161;
+    --primary:20, 144,222;
 }
