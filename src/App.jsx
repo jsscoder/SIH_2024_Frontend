@@ -14,8 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Overlayer/>} />
-          <Route path='/signup' element={<Overlayer />} />
+          <Route path="/Auth" element={<Overlayer/>} />
           
         </Routes>
       </BrowserRouter>
