@@ -1,10 +1,10 @@
 import React,{useRef} from "react";
 import { Play, Plus, Calendar} from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // import { Button } from "../../Components/ui/Button";
-import { Button } from "@radix-ui/themes";
+
 
 
 
@@ -25,7 +25,7 @@ const Hero= () => {
             </motion.div>
           </div>
         </div>
-        <h1 className="text-3xl font-Google1 font-extralight text-center md:text-6xl md:font-light drop-shadow- toslte6 shadow-custom text-slate-900">
+        <h1 className="text-3xl font-Google1 font-extralight text-center md:text-6xl md:font-light drop-shadow- toslte6 shadow-custom text-mytext ">
            Automated System for Faculty
         </h1>
         <p className="max-w-2xl font- mx-auto text-base text-center text-slate-600 md:text-lg">

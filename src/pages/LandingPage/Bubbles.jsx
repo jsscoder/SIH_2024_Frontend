@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 
-const Bubbles= ({ yStart, yEnd }) => {
+const Bubbles= ({ yStart,yEnd }) => {
   return (
     <div className="relative h-1">
       <div className="absolute flex justify-between w-full ">
-        {[...Array(30)].map((_, indx) => {
+        {[...Array(80)].map((_, indx) => {
           return (
             <div
               key={indx}
@@ -30,8 +30,8 @@ const Bubbles= ({ yStart, yEnd }) => {
                     repeatType: "loop",
                     duration:
                       indx & 1
-                        ? Math.random() * 10 + 10
-                        : Math.random() * 10 + 20,
+                        ? Math.random() * 10 + 100
+                        : Math.random() * 10 + 200,
                   },
                 }}
               ></motion.span>
