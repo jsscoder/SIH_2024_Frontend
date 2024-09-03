@@ -29,8 +29,10 @@ const Login = () => {
 
     return (
         <>
-        <div className={`w-[70%]  relative  min-h-[80%] max-h-[90%] bg-white ${isnotLogged?"rounded-r-xl":"rounded-l-xl"} flex`}>
-            <div className=' flex flex-col justify-center items-center gap-5 rounded-xl bg-white w-[50%] py-12'>
+
+        {/* login form */}
+        <div className={`w-[70%] rounded-lg relative  min-h-[80%] max-h-[95%] h-auto bg-white ${isnotLogged?"md:rounded-r-xl":" md:rounded-l-xl"} flex`}>
+            <div className={`md:flex flex-col justify-center items-center gap-5 rounded-xl bg-white md:w-[50%] w-full md:py-12 py-6 ${isnotLogged?"hidden":"flex"}`}>
                 <h1 className="text-3xl font-bold">SignIn</h1>
                 <div className="flex gap-2 justify-center items-center border-gray-500 border cursor-pointer p-1 rounded">
                     <img src={google} alt="" className="h-5 inline" />
@@ -46,15 +48,20 @@ const Login = () => {
                 </select>
                 <p className=''>Forget Password?</p>
                 <button className='bg-primary p-2 rounded text-white px-10 font-bold'>SIGN IN</button>
-
+                <p className='flex md:hidden'>Don't have account<span className='text-blue-600 cursor-pointer font-bold' onClick={()=>{setLogged(true)}}> SignUp </span></p>                
 
             </div>
-            <div className={`absolute w-[50%] ${isnotLogged?"left-0 rounded-r-[64px] ":"right-0 rounded-l-[64px] "} bg-primary flex flex-col justify-center items-center text-white h-full  gap-5 transition-[border-radius] duration-[100ms] ease-in-out`}>
+
+
+            {/*  */}
+            <div className={`absolute w-[50%] ${isnotLogged?"left-0 rounded-r-[64px] ":"right-0 rounded-l-[64px] "} bg-primary hidden md:flex flex-col justify-center items-center text-white h-full  gap-5 transition-[border-radius] duration-[100ms] ease-in-out `}>
                 <h1 className="font-extrabold text-[2.1rem]">{isnotLogged?"Have An Account!!!":"Hello, Friends!"}</h1>
                 <p className="">{isnotLogged?"Have an account":"New User???"}</p>
                 <button className="capitalize bg-transparent rounded shadow-lg border-white border py-1 px-4" onClick={()=>{isnotLogged?setLogged(false):setLogged(true)}}>{isnotLogged?"Sign In":"SignUp"}</button>
             </div>
-            <div className="w-[50%] flex flex-col justify-center items-center gap-5 rounded-xl bg-white py-12">
+
+            {/* signup form */}
+            <div className={`md:w-[50%] h-auto w-[100%] md:flex flex-col justify-center items-center gap-5 rounded-xl bg-white py-12 ${isnotLogged?"flex":"hidden"}`}>
                 <h1 className=""></h1><h1 className="text-3xl font-bold">SignUp</h1>
                 <div className="flex gap-2 justify-center items-center border-gray-500 border cursor-pointer p-1 rounded">
                     <img src={google} alt="" className="h-5 inline" />
@@ -73,7 +80,7 @@ const Login = () => {
                     <option value="faculty">Faculty</option>
                 </select>
                 <button onClick={handleRegister} className='bg-primary border-red-500 p-2 rounded text-white px-10 font-bold'>SIGN IN</button>
-
+                <p className='flex md:hidden'>Have Account <span className='text-blue-600 cursor-pointer font-bold' onClick={()=>{setLogged(false)}}> SignIn </span></p>
             </div>
         </div>
         </>
