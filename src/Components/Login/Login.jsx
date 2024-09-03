@@ -20,6 +20,7 @@ const Login = () => {
                     <span>SignIn with Google</span>
                 </div>
                 <p className="text-sm">Or</p>
+                
                 <Inputs id={"email"} pholder='Email'/>
                 <Inputs id='password' pholder='Password' />
                 <p className=''>Forget Password?</p>

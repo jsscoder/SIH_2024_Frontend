@@ -27,18 +27,13 @@ const Hero= () => {
           </div>
         </div>
         <h1 className="text-3xl font-Google1 font-extralight text-center md:text-6xl md:font-light drop-shadow- toslte6 shadow-custom text-mytext ">
-           Automated System for Faculty
+           Automated System for Faculty 
         </h1>
         <p className="max-w-2xl font- mx-auto text-base text-center text-slate-600 md:text-lg">
         Facilitates and Streamlines the Career Advancement Process For Faculty Members In Higher Education Institutions
         </p>
         <div className="flex items-center justify-center space-x-5">
-          {/* <Link to="/">
-            <Button>Create a Test</Button>
-          </Link>
-          <Link to="/">
-            <Button variant="outline">Watch Demo</Button>
-          </Link> */}
+          
         </div>
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="mt-16 flow-root sm:mt-24">

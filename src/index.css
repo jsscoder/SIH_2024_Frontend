@@ -17,3 +17,14 @@
     --btntext : 250,250,250;
     --bgbtn : 50,150,30;
   }
+.dark{
+    --bg : 0 0 0; 
+    --border : 0 0 0;
+    --card : 0 0 0;
+    --bgcard: 0 0 0;
+    --bg2card : 0 0 0;
+    --mytext : 255, 255, 255;
+    --btntext : 0,0,0;
+    --bgbtn : 255,255,255;
+  
+}
