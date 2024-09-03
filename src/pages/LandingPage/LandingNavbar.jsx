@@ -1,7 +1,6 @@
 
-import { Button } from "@radix-ui/themes";
-import CreateAccount from '../../Components/Register/Register';
-import UserLogin from '../../Components/Login/Login';
+
+
 import  {Link , useNavigate} from 'react-router-dom';
 
 import ICONS from "../../assets/Exports/Index"
@@ -31,7 +30,7 @@ const LandingNavbar = () => {
               Login
             </Link>
             <Link to="/auth" onClick={()=>setLogged(true)}>
-              <Button variant="outline">Register</Button>
+              <button variant="outline">Register</button>
             </Link>
           </div>
         

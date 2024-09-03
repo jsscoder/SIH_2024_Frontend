@@ -3,9 +3,6 @@ import { Play, Plus, Calendar} from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-// import { Button } from "../../Components/ui/Button";
-import { Button } from "@radix-ui/themes";
-
 
 
 const Hero= () => {
