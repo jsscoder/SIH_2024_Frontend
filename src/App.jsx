@@ -5,7 +5,7 @@ import { LandingPage } from './pages/LandingPage/Landing'
 import Login from './Components/Login/Login'
 import Overlayer from './pages/Overlay/Overlayer'
 import Otp from './Components/OtpPage/Otp'
-import AdminDashboard from './Components/Dashboard/Dashboard'
+import AdminDashboard from './Components/Dashboard/AdminDashboard'
 function App() {
   const [count, setCount] = useState(0)
 
