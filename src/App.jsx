@@ -17,8 +17,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/Auth" element={<Overlayer/>} />
           <Route path="/Otp" element={<Otp/>} />
-          <Route path="/login/AdminDashboard" element={<AdminDashboard/>} />
-          <Route path="/login/TeacherDashboard" element={<TeacherDashboard/>} />
+          <Route path="api/login/AdminDashboard" element={<AdminDashboard/>} />
+          <Route path="api/login/TeacherDashboard" element={<TeacherDashboard/>} />
         </Routes>
       </BrowserRouter>
     
