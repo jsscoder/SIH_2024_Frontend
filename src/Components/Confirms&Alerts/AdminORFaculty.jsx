@@ -18,13 +18,13 @@ const AdminORFaculty = () => {
     const handleAdmin = () => {
        setIsFaculty(false);
         setAdmin(true);
-        navigate('/auth');
+        navigate('/auth/admin');
 
     }
     const handleFaculty = () => {
         setAdmin(false);
         setIsFaculty(true);
-        navigate('/auth');
+        navigate('/auth/faculty');
     }
 
 
