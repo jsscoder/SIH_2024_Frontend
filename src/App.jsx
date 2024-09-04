@@ -13,6 +13,7 @@ import Dashboard from './Components/Dashboard/AdminDashboard'
 
 import AdminORFaculty  from './Components/Confirms&Alerts/AdminORFaculty'
 import { Toaster } from 'react-hot-toast'
+import AdminDashboard from './Components/Dashboard/AdminDashboard'
 function App() {
   const [Theme, settheme] = useState("light");
 
@@ -38,7 +39,7 @@ function App() {
               <Route path="faculty" element={<Register/>} />
           </Route>
           <Route path="/confirm" element={<AdminORFaculty/>} />
-          <Route path="/dashboard" element={<Dashboard/> } /> 
+          <Route path="/api/login" element={<AdminDashboard/> } /> 
           <Route path="*" element={<h1>404</h1>} />
           
           
