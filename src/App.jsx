@@ -9,7 +9,7 @@ import Otp from './Components/OtpPage/Otp'
 import Register from './Components/Register/Register'
 import Dashboard from './Components/Dashboard/AdminDashboard'
 
-
+import Index from './Components/FacultyDashboard/Index'
 
 import AdminORFaculty  from './Components/Confirms&Alerts/AdminORFaculty'
 import { Toaster } from 'react-hot-toast'
@@ -40,6 +40,7 @@ function App() {
           <Route path="/confirm" element={<AdminORFaculty/>} />
           <Route path="/dashboard" element={<Dashboard/> } /> 
           <Route path="*" element={<h1>404</h1>} />
+          <Route path="/tech" element={<Index/>} />
           
           
           

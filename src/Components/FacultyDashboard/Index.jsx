@@ -1,14 +1,15 @@
 
-import Sidebar from './components/sidebar/Sidebar';
-import Home from './components/home/Home';
-import About from './components/about/About';
-import Services from './components/services/Services';
-import Resume from './components/resume/Resume';
-import Portfolio from './components/portfolio/Portfolio';
-import Testimonials from './components/testimonials/Testimonials';
-import Blog from './components/blog/Blog';
-import Contact from './components/contact/Contact';
+import Sidebar from './FacultyComponents/sidebar/Sidebar';
+import Home from './FacultyComponents/home/Home';
+import About from './FacultyComponents/about/About';
+import Services from './FacultyComponents/services/Services';
+import Resume from './FacultyComponents/resume/Resume';
+import Portfolio from './FacultyComponents/portfolio/Portfolio';
+import Testimonials from './FacultyComponents/testimonials/Testimonials';
+import Blog from './FacultyComponents/blog/Blog';
+import Contact from './FacultyComponents/contact/Contact';
 import useLocalStorage from 'use-local-storage'
+import './faculty.css';
 
 
 const Index = () => {
