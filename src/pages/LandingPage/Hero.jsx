@@ -18,7 +18,7 @@ const Hero= () => {
     const {Theme,setTheme} = useContext(MyTheme);
 
     const Toggle=()=>{
-      console.log(Theme);
+     
 
       if(Theme==="light"){
         setTheme("dark")

@@ -5,7 +5,8 @@ import { LandingPage } from './pages/LandingPage/Landing'
 import { MyTheme } from './Context/ThemeContext'
 import Login from './Components/Login/Login'
 import Register from './Components/Register/Register'
-import Dashboard from './Components/Dashboard/Dashboard'
+import Dashboard from './Components/Dashboard/AdminDashboard'
+
 
 import Overlayer from './pages/Overlay/Overlayer'
 import AdminORFaculty  from './Components/Confirms&Alerts/AdminORFaculty'
@@ -38,6 +39,9 @@ function App() {
           <Route path="*" element={<h1>404</h1>} />
           
           
+          
+          {/* <Route path="/Otp" element={<Otp/>} /> */}
+
         </Routes>
       </BrowserRouter>
 
