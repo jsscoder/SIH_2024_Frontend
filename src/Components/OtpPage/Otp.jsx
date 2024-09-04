@@ -51,7 +51,7 @@ const Otp = ({length=6}) => {
   return (
     <>
         <div className="h-screen flex justify-center items-center bg-primary/50 w-full">
-            <div className="bg-white/90  flex flex-col justify-center items-center w-[50%] h-[70%] rounded-lg shadow-lg">
+            <div className="bg-white/90  flex flex-col justify-center items-center md:w-[50%] w-[80%] h-[60%] rounded-lg shadow-lg">
                 <h1 className="text-3xl font-extrabold">Verify</h1>
                 <p className="">Your code has been send via your email</p>
                 <div className="my-3">
@@ -68,7 +68,7 @@ const Otp = ({length=6}) => {
 
                 </div>
                 <button className="bg-primary text-gray-200 font-bold px-2 py-1 rounded">Verify</button>
-                <p className="">Didn't receive code? <span className='text-blue-500 font-semibold underline cursor-pointer'>Request code</span></p>
+                <p className="mt-3">Didn't receive code? <span className='text-blue-500 font-semibold underline cursor-pointer'>Request code</span></p>
             </div>
         </div>
     </>
