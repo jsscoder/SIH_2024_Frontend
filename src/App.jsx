@@ -4,6 +4,8 @@ import { BrowserRouter, Route ,Routes} from 'react-router-dom'
 import { LandingPage } from './pages/LandingPage/Landing'
 import { MyTheme } from './Context/ThemeContext'
 import Login from './Components/Login/Login'
+import Overlayer from './pages/Overlay/Overlayer'
+import Otp from './Components/OtpPage/Otp'
 import Register from './Components/Register/Register'
 import Dashboard from './Components/Dashboard/AdminDashboard'
 
@@ -30,6 +32,7 @@ function App() {
           
           
           <Route path="/" element={<LandingPage />} />
+         
           <Route path="/auth" element={<Overlayer/>} >
               <Route path="admin" element={<Login/>} />
               <Route path="faculty" element={<Register/>} />
