@@ -10,7 +10,7 @@ import Register from './Components/Register/Register'
 import Dashboard from './Components/Dashboard/AdminDashboard'
 
 
-import Overlayer from './pages/Overlay/Overlayer'
+
 import AdminORFaculty  from './Components/Confirms&Alerts/AdminORFaculty'
 import { Toaster } from 'react-hot-toast'
 function App() {
