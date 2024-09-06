@@ -1,28 +1,47 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Button, Drawer, Sidebar, TextInput, Footer, Navbar, Card } from "flowbite-react";
+import { Button, Drawer, Sidebar, TextInput, Footer, Navbar } from "flowbite-react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { HiChartPie, HiClipboard, HiCollection, HiInformationCircle, HiLogin, HiPencil, HiSearch, HiShoppingBag, HiUsers, HiMenuAlt3 } from "react-icons/hi";
+import { HiChartPie, HiClipboard, HiCollection, HiInformationCircle, HiLogin, HiPencil, HiSearch, HiShoppingBag, HiUsers, HiMenuAlt3, HiTrash } from "react-icons/hi";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { Pie } from "react-chartjs-2";
+import "chart.js/auto";
 
 const classNames = (...classes) => classes.filter(Boolean).join(" ");
+
+const bubbleVariants = {
+  initial: { scale: 1 },
+  animate: {
+    scale: [1, 1.1, 1],
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+const chartVariants = {
+  initial: { y: 10, opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
 
 const AdminDashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [teachers, setTeachers] = useState(
-    JSON.parse(localStorage.getItem("teachers")) || []
-  );
-  const [newTeacher, setNewTeacher] = useState({ name: "", photo: "", uid: "" });
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [teachers, setTeachers] = useState(JSON.parse(localStorage.getItem("teachers")) || []);
+  const [newTeacher, setNewTeacher] = useState({ name: "", uid: "", dateOfJoining: "" });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [dateSearch, setDateSearch] = useState("");
 
   useEffect(() => {
     localStorage.setItem("teachers", JSON.stringify(teachers));
   }, [teachers]);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const handleDrawerToggle = () => setIsOpen(!isOpen);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,82 +50,123 @@ const AdminDashboard = () => {
 
   const handleAddTeacher = (e) => {
     e.preventDefault();
-    if (newTeacher.name && newTeacher.photo && newTeacher.uid) {
-      setTeachers((prevState) => [...prevState, newTeacher]);
-      setNewTeacher({ name: "", photo: "", uid: "" }); // Reset the form
+    if (newTeacher.name && newTeacher.uid && newTeacher.dateOfJoining) {
+      setTeachers((prevState) => [
+        ...prevState,
+        { ...newTeacher, dateCreated: new Date().toISOString().split("T")[0] }
+      ]);
+      setNewTeacher({ name: "", uid: "", dateOfJoining: "" });
     }
   };
 
+  const handleSearch = (e) => setSearchTerm(e.target.value);
+  const handleDateSearch = (e) => setDateSearch(e.target.value);
+
+  const handleDeleteTeacher = (uid) => {
+    setTeachers((prevState) => prevState.filter((teacher) => teacher.uid !== uid));
+  };
+
+  const filteredTeachers = teachers.filter(
+    (teacher) =>
+      (teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      teacher.uid.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (dateSearch ? teacher.dateCreated === dateSearch : true)
+  );
+
+  const data = {
+    labels: ["Excellent", "Good", "Average", "Poor"],
+    datasets: [
+      {
+        data: [12, 19, 3, 5],
+        backgroundColor: ["#4a90e2", "#50e3c2", "#e94e77", "#f5a623"],
+        hoverBackgroundColor: ["#357abd", "#36d9a4", "#d74163", "#e4931f"],
+        borderWidth: 2,
+        borderColor: "#fff",
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  const options = {
+    plugins: {
+      legend: {
+        position: "bottom",
+        labels: {
+          color: darkMode ? "#e0e0e0" : "#333",
+          font: {
+            size: 14,
+            weight: "600",
+          },
+        },
+      },
+    },
+    maintainAspectRatio: false,
+  };
+
   return (
-    <div className={classNames(darkMode ? "dark" : "", "h-screen flex")}>
-      {/* Sidebar */}
-      <motion.aside
-        className={classNames(
-          "fixed top-0 left-0 w-64 bg-gray-800 dark:bg-gray-900 text-white transform transition-transform duration-300",
-          menuOpen ? "translate-x-0" : "-translate-x-64",
-          "md:translate-x-0 h-full"
-        )}
-        initial={{ x: "-100%" }}
-        animate={{ x: menuOpen ? "0%" : "-100%" }}
-        transition={{ type: "tween", duration: 0.3 }}
-      >
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 bg-gray-700 dark:bg-gray-800">
-            <h1 className="text-lg font-bold">Admin Dashboard</h1>
-            <button onClick={toggleDarkMode} className="text-2xl focus:outline-none">
-              {darkMode ? (
-                <MdLightMode size={24} className="text-yellow-400" />
-              ) : (
-                <MdDarkMode size={24} className="text-gray-200" />
-              )}
-            </button>
-          </div>
-          <ul className="flex-1">
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Home</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Appraisals</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Reports</li>
-            <li className="p-4 hover:bg-gray-700 cursor-pointer">Settings</li>
-          </ul>
-          <div className="p-4 bg-gray-700 dark:bg-gray-800 flex justify-center items-center">
-            <Button onClick={() => setDrawerOpen(true)} className="text-2xl md:hidden">
-              <HiMenuAlt3 />
-            </Button>
-          </div>
+    <div className={classNames(darkMode ? "dark" : "", "flex flex-col h-screen")}>
+      {/* Navbar */}
+      <Navbar fluid rounded className={classNames(darkMode ? "bg-gray-800" : "bg-white", "shadow-md")}>
+        <div className="flex items-center justify-between">
+          <Button onClick={toggleDarkMode} className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+            {darkMode ? <MdLightMode size={20} className="text-yellow-400" /> : <MdDarkMode size={20} className="text-gray-800" />}
+          </Button>
+          <Button onClick={handleDrawerToggle} className="p-2 rounded-md">
+            <HiMenuAlt3 size={20} />
+          </Button>
         </div>
-      </motion.aside>
+      </Navbar>
+
+      {/* Drawer */}
+      <Drawer open={isOpen} onClose={handleDrawerToggle}>
+        <Drawer.Header title="MENU" />
+        <Drawer.Items>
+          <Sidebar aria-label="Sidebar with multi-level dropdown example" className="[&>div]:bg-transparent [&>div]:p-0">
+            <div className="flex h-full flex-col justify-between py-2">
+              <div>
+                <form className="pb-3 md:hidden">
+                  <TextInput icon={HiSearch} type="search" placeholder="Search" required size={32} onChange={handleSearch} />
+                </form>
+                <Sidebar.Items>
+                  <Sidebar.ItemGroup>
+                    <Sidebar.Item href="/" icon={HiChartPie}>Dashboard</Sidebar.Item>
+                    <Sidebar.Item href="/e-commerce/products" icon={HiShoppingBag}>Products</Sidebar.Item>
+                    <Sidebar.Item href="/users/list" icon={HiUsers}>Users list</Sidebar.Item>
+                    <Sidebar.Item href="/authentication/sign-in" icon={HiLogin}>Sign in</Sidebar.Item>
+                    <Sidebar.Item href="/authentication/sign-up" icon={HiPencil}>Sign up</Sidebar.Item>
+                  </Sidebar.ItemGroup>
+                  <Sidebar.ItemGroup>
+                    <Sidebar.Item href="https://github.com/themesberg/flowbite-react/" icon={HiClipboard}>Docs</Sidebar.Item>
+                    <Sidebar.Item href="https://flowbite-react.com/" icon={HiCollection}>Components</Sidebar.Item>
+                    <Sidebar.Item href="https://github.com/themesberg/flowbite-react/issues" icon={HiInformationCircle}>Help</Sidebar.Item>
+                  </Sidebar.ItemGroup>
+                </Sidebar.Items>
+              </div>
+            </div>
+          </Sidebar>
+        </Drawer.Items>
+      </Drawer>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 transition-colors duration-300 ml-64 md:ml-0">
-        {/* Admin Navbar */}
-        <Navbar fluid rounded>
-          <Navbar.Brand href="https://flowbite-react.com">
-            <img src="/favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span>
-          </Navbar.Brand>
-          <div className="flex md:order-2">
-            <Button>Get started</Button>
-            <Navbar.Toggle />
-          </div>
-          <Navbar.Collapse>
-            <Navbar.Link href="#" active>
-              Home
-            </Navbar.Link>
-            <Navbar.Link href="#">About</Navbar.Link>
-            <Navbar.Link href="#">Services</Navbar.Link>
-            <Navbar.Link href="#">Pricing</Navbar.Link>
-            <Navbar.Link href="#">Contact</Navbar.Link>
-          </Navbar.Collapse>
-        </Navbar>
+      <main className={classNames("flex-1 p-8 transition-colors", darkMode ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-900")}>
+        {/* Heading */}
+        <header className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-blue-700 dark:text-blue-400">Admin Dashboard</h1>
+        </header>
 
         {/* Add Teacher Form */}
-        <section className="mb-12">
-          <form onSubmit={handleAddTeacher} className="bg-gray-200 dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+        <section className="mb-12 max-w-4xl mx-auto">
+          <motion.form
+            onSubmit={handleAddTeacher}
+            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
             <h3 className="text-lg font-bold mb-4 text-blue-700 dark:text-blue-400">Add Teacher</h3>
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Name
-                </label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
                 <input
                   type="text"
                   name="name"
@@ -118,23 +178,7 @@ const AdminDashboard = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Photo URL
-                </label>
-                <input
-                  type="text"
-                  name="photo"
-                  value={newTeacher.photo}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Teacher Photo URL"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  UID
-                </label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">UID</label>
                 <input
                   type="text"
                   name="uid"
@@ -145,98 +189,96 @@ const AdminDashboard = () => {
                   required
                 />
               </div>
+              <div className="col-span-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date of Joining</label>
+                <input
+                  type="date"
+                  name="dateOfJoining"
+                  value={newTeacher.dateOfJoining}
+                  onChange={handleInputChange}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                />
+              </div>
             </div>
-            <button
-              type="submit"
-              className="mt-4 w-full bg-blue-600 dark:bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 dark:hover:bg-blue-400"
-            >
-              Add Teacher
-            </button>
-          </form>
+            <div className="mt-6">
+              <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 transition-transform">
+                Add Teacher
+              </button>
+            </div>
+          </motion.form>
         </section>
 
-        {/* Teacher Cards */}
-        <section>
-          <h3 className="text-lg font-bold mb-4 text-blue-700 dark:text-blue-400">Teacher List</h3>
-          <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {teachers.map((teacher, index) => (
-              <Card key={index} className="max-w-sm bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-200">
-                <div className="flex justify-end px-4 pt-4">
-                  <Dropdown inline label="">
-                    <Dropdown.Item>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Edit
-                      </a>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Export Data
-                      </a>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Delete
-                      </a>
-                    </Dropdown.Item>
-                  </Dropdown>
-                </div>
-                <div className="flex flex-col items-center pb-10">
-                  <img
-                    src={teacher.photo}
-                    alt={teacher.name}
-                    className="mb-3 h-24 w-24 rounded-full shadow-lg"
-                  />
-                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{teacher.name}</h5>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">UID: {teacher.uid}</span>
-                  <div className="mt-4 flex space-x-3 lg:mt-6">
-                    <a
-                      href="#"
-                      className="inline-flex items-center rounded-lg bg-blue-600 dark:bg-blue-500 px-4 py-2 text-center text-sm font-medium text-white hover:bg-blue-700 dark:hover:bg-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800"
+        {/* Teacher List */}
+        <section className="mb-12 max-w-4xl mx-auto">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-bold mb-4 text-blue-700 dark:text-blue-400">Teacher List</h3>
+            <div className="mb-4 flex space-x-4">
+              <input
+                type="text"
+                placeholder="Search by Name or UID"
+                value={searchTerm}
+                onChange={handleSearch}
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+              <input
+                type="date"
+                placeholder="Search by Date"
+                value={dateSearch}
+                onChange={handleDateSearch}
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+            </div>
+            {filteredTeachers.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {filteredTeachers.map((teacher, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 shadow-md border border-gray-200 dark:border-gray-700 relative"
+                    initial="initial"
+                    animate="animate"
+                    variants={bubbleVariants}
+                  >
+                    <button
+                      onClick={() => handleDeleteTeacher(teacher.uid)}
+                      className="absolute top-2 right-2 p-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
+                      title="Delete Teacher"
                     >
-                      View Status
-                    </a>
-                    <a
-                      href="#"
-                      className="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-                    >
-                      View Details
-                    </a>
-                  </div>
-                </div>
-              </Card>
-            ))}
+                      <HiTrash size={20} />
+                    </button>
+                    <h4 className="text-xl font-semibold">{teacher.name}</h4>
+                    <p className="text-gray-600 dark:text-gray-300">UID: {teacher.uid}</p>
+                    <p className="text-gray-600 dark:text-gray-300">Date of Joining: {teacher.dateOfJoining}</p>
+                    <p className="text-gray-600 dark:text-gray-300">Date Created: {teacher.dateCreated}</p>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-500 dark:text-gray-300">No teachers added yet.</p>
+            )}
           </div>
+        </section>
+
+        {/* Pie Chart */}
+        <section className="max-w-4xl mx-auto">
+          <motion.div
+            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+            initial="initial"
+            animate="animate"
+            variants={chartVariants}
+          >
+            <h3 className="text-lg font-bold mb-4 text-blue-700 dark:text-blue-400">Teacher Ratings</h3>
+            <div className="relative h-64">
+              <Pie data={data} options={options} />
+            </div>
+          </motion.div>
         </section>
       </main>
 
       {/* Footer */}
-      <Footer container>
-        <div className="w-full text-center">
-          <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-            <Footer.Brand
-              href="https://flowbite.com"
-              src="https://flowbite.com/docs/images/logo.svg"
-              alt="Flowbite Logo"
-              name="Flowbite"
-            />
-            <Footer.LinkGroup>
-              <Footer.Link href="#">About</Footer.Link>
-              <Footer.Link href="#">Privacy Policy</Footer.Link>
-              <Footer.Link href="#">Licensing</Footer.Link>
-              <Footer.Link href="#">Contact</Footer.Link>
-            </Footer.LinkGroup>
-          </div>
-          <Footer.Divider />
-          <Footer.Copyright href="#" by="Flowbite™" year={2022} />
+      <Footer className="bg-gray-800 dark:bg-gray-900 text-white">
+        <div className="text-center p-4">
+          &copy; {new Date().getFullYear()} Admin Dashboard. All rights reserved.
         </div>
       </Footer>
     </div>
